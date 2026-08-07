@@ -1,6 +1,5 @@
 # portafolio_erick_cua
-
-A new Flutter project.
+Portafolio de Arte
 
 ## Getting Started
 
