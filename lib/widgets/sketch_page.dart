@@ -15,9 +15,7 @@ class SketchPage extends StatelessWidget {
   }
 
   Widget _buildEmpty() {
-    return Container(
-      color: const Color(0xFF49403E),
-    );
+    return Container(color: const Color(0xFF49403E));
   }
 
   Widget _buildCover() {
@@ -27,11 +25,7 @@ class SketchPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.auto_stories,
-              size: 72,
-              color: Colors.white70,
-            ),
+            Icon(Icons.auto_stories, size: 72, color: Colors.white70),
             SizedBox(height: 24),
             Text(
               'Portafolio',
@@ -64,11 +58,7 @@ class SketchPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.brush_outlined,
-              size: 48,
-              color: Colors.white54,
-            ),
+            Icon(Icons.brush_outlined, size: 48, color: Colors.white54),
             SizedBox(height: 16),
             Text(
               'Gracias por ver',
@@ -88,7 +78,9 @@ class SketchPage extends StatelessWidget {
   Widget _buildPage() {
     final isDark = data.isDark;
     final defaultColor = const Color(0xFFD8C2A1);
-    final bgColor = isDark ? const Color(0xFF2C2C3A) : (data.pageColor ?? defaultColor);
+    final bgColor = isDark
+        ? const Color(0xFF2C2C3A)
+        : (data.pageColor ?? defaultColor);
     final textColor = isDark ? Colors.white70 : const Color(0xFF4A4A4A);
     final iconColor = isDark ? Colors.transparent : Colors.grey.shade400;
 
@@ -129,31 +121,115 @@ class SketchPage extends StatelessWidget {
   Widget _buildImages(Color iconColor) {
     if (data.imagePath == null) {
       return Center(
-        child: Icon(
-          Icons.brush_outlined,
-          size: 64,
-          color: iconColor,
-        ),
+        child: Icon(Icons.brush_outlined, size: 64, color: iconColor),
       );
     }
+
+    const cornerSize = 20.0;
+    const cornerWidth = 2.0;
+    final cornerColor = data.isDark ? Colors.white54 : Colors.black87;
 
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(4),
-          child: Image.asset(
-            data.imagePath!,
-            fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) {
-              return const Center(
-                child: Icon(Icons.broken_image_outlined, size: 48, color: Colors.grey),
-              );
-            },
+        child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: Image.asset(
+                data.imagePath!,
+                fit: BoxFit.contain,
+                filterQuality: FilterQuality.high,
+                gaplessPlayback: true,
+                errorBuilder: (context, error, stackTrace) {
+                  return const Center(
+                    child: Icon(
+                      Icons.broken_image_outlined,
+                      size: 48,
+                      color: Colors.grey,
+                    ),
+                  );
+                },
+              ),
+            ),
+            Positioned(
+              top: 0,
+              left: 0,
+              child: _buildCorner(
+                cornerSize,
+                cornerWidth,
+                cornerColor,
+                top: true,
+                left: true,
+              ),
+            ),
+            Positioned(
+              top: 0,
+              right: 0,
+              child: _buildCorner(
+                cornerSize,
+                cornerWidth,
+                cornerColor,
+                top: true,
+                right: true,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              left: 0,
+              child: _buildCorner(
+                cornerSize,
+                cornerWidth,
+                cornerColor,
+                bottom: true,
+                left: true,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: _buildCorner(
+                cornerSize,
+                cornerWidth,
+                cornerColor,
+                bottom: true,
+                right: true,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCorner(
+    double size,
+    double width,
+    Color color, {
+    bool top = false,
+    bool bottom = false,
+    bool left = false,
+    bool right = false,
+  }) {
+    return SizedBox(
+      width: size,
+      height: size,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border(
+            top: top ? BorderSide(color: color, width: width) : BorderSide.none,
+            bottom: bottom
+                ? BorderSide(color: color, width: width)
+                : BorderSide.none,
+            left: left
+                ? BorderSide(color: color, width: width)
+                : BorderSide.none,
+            right: right
+                ? BorderSide(color: color, width: width)
+                : BorderSide.none,
           ),
         ),
       ),
     );
   }
 }
-
