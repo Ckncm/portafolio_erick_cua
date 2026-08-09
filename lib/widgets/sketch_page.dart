@@ -127,7 +127,7 @@ class SketchPage extends StatelessWidget {
   }
 
   Widget _buildImages(Color iconColor) {
-    if (data.imagePaths.isEmpty) {
+    if (data.imagePath == null) {
       return Center(
         child: Icon(
           Icons.brush_outlined,
@@ -137,58 +137,23 @@ class SketchPage extends StatelessWidget {
       );
     }
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: data.imagePaths.length == 1
-          ? _buildSingleImage(data.imagePaths[0])
-          : _buildDualImages(),
-    );
-  }
-
-  Widget _buildSingleImage(String path) {
     return Center(
-      child: AspectRatio(
-        aspectRatio: 9 / 16,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(4),
           child: Image.asset(
-            path,
+            data.imagePath!,
             fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) {
+              return const Center(
+                child: Icon(Icons.broken_image_outlined, size: 48, color: Colors.grey),
+              );
+            },
           ),
         ),
       ),
     );
   }
-
-  Widget _buildDualImages() {
-    return Row(
-      children: [
-        Expanded(
-          child: AspectRatio(
-            aspectRatio: 9 / 16,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: Image.asset(
-                data.imagePaths[0],
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-        ),
-        const SizedBox(width: 16),
-        Expanded(
-          child: AspectRatio(
-            aspectRatio: 9 / 16,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(4),
-              child: Image.asset(
-                data.imagePaths[1],
-                fit: BoxFit.contain,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }
+

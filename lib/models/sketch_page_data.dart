@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class SketchPageData {
-  final List<String> imagePaths;
+  final String? imagePath;
   final String? title;
   final bool isCover;
   final bool isBackCover;
@@ -10,7 +10,7 @@ class SketchPageData {
   final Color? pageColor;
 
   const SketchPageData({
-    required this.imagePaths,
+    this.imagePath,
     this.title,
     this.isCover = false,
     this.isBackCover = false,
@@ -20,7 +20,7 @@ class SketchPageData {
   });
 
   const SketchPageData.cover()
-      : imagePaths = const [],
+      : imagePath = null,
         title = null,
         isCover = true,
         isBackCover = false,
@@ -29,7 +29,7 @@ class SketchPageData {
         pageColor = null;
 
   const SketchPageData.backCover()
-      : imagePaths = const [],
+      : imagePath = null,
         title = null,
         isCover = false,
         isBackCover = true,
@@ -38,7 +38,7 @@ class SketchPageData {
         pageColor = null;
 
   const SketchPageData.empty()
-      : imagePaths = const [],
+      : imagePath = null,
         title = null,
         isCover = false,
         isBackCover = false,
