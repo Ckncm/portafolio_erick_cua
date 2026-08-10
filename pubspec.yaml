@@ -62,10 +62,10 @@ flutter:
     - assets/calet.png
     - assets/google.webp
     - assets/apple.webp
-    - assets/chats.jpg
-    - assets/clubs.jpg
-    - assets/explorar.jpg
-    - assets/post.jpg
+    - assets/chats.webp
+    - assets/clubs.webp
+    - assets/explorar.webp
+    - assets/post.webp
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
