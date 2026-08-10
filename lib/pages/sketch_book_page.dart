@@ -57,21 +57,16 @@ class _SketchBookPageState extends State<SketchBookPage> {
     });
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
   Future<void> _precacheImages() async {
     final allPaths = [
       ..._pages.where((p) => p.imagePath != null).map((p) => p.imagePath!),
       ..._extraAssets,
     ];
-
     await Future.wait(
-      allPaths.map((path) => precacheImage(AssetImage(path), context).catchError((_) {})),
+      allPaths.map(
+        (path) => precacheImage(AssetImage(path), context).catchError((_) {}),
+      ),
     );
-
     if (mounted) setState(() => _imagesReady = true);
   }
 
@@ -128,58 +123,76 @@ class _SketchBookPageState extends State<SketchBookPage> {
           return KeyEventResult.handled;
         },
         autofocus: true,
-        child: Center(
-          child: _imagesReady
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 32,
-                    vertical: 24,
-                  ),
-                  child: BookFlip.builder(
-                    controller: _controller,
-                    pageCount: _totalPages,
-                    pageSize: const Size(360, 520),
-                    material: BookFlipMaterial.paper,
-                    curl: BookFlipCurl.gentle,
-                    effects: const BookFlipEffects(
-                      gloss: false,
-                      grain: false,
-                      castShadow: true,
-                      spineShadow: true,
-                      edge: false,
-                      translucency: false,
+        child: Stack(
+          children: [
+            Center(
+              child: _imagesReady
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                        vertical: 24,
+                      ),
+                      child: BookFlip.builder(
+                        controller: _controller,
+                        pageCount: _totalPages,
+                        pageSize: const Size(360, 520),
+                        material: BookFlipMaterial.paper,
+                        curl: BookFlipCurl.gentle,
+                        effects: const BookFlipEffects(
+                          gloss: false,
+                          grain: false,
+                          castShadow: true,
+                          spineShadow: true,
+                          edge: false,
+                          translucency: false,
+                        ),
+                        fit: BookFit.contain,
+                        pageBuilder: (context, index) {
+                          if (index == 2) {
+                            return SketchSectionPage(
+                              data: const SketchPageData(),
+                              children: const [
+                                Text(
+                                  'Dibujos a Mano',
+                                  style: TextStyle(fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                ),
+                                Icon(Icons.brush, size: 48),
+                              ],
+                            );
+                          }
+                          if (index == 11) return _buildCaletSection();
+                          return SketchPage(data: _pages[index]);
+                        },
+                      ),
+                    )
+                  : const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircularProgressIndicator(color: Colors.white54),
+                        SizedBox(height: 16),
+                        Text(
+                          'Cargando portafolio...',
+                          style: TextStyle(color: Colors.white54, fontSize: 14),
+                        ),
+                      ],
                     ),
-                    fit: BookFit.contain,
-                    pageBuilder: (context, index) {
-                      if (index == 2) {
-                        return SketchSectionPage(
-                          data: const SketchPageData(),
-                          children: const [
-                            Text(
-                              'Dibujos a Mano',
-                              style: TextStyle(fontSize: 18),
-                              textAlign: TextAlign.center,
-                            ),
-                            Icon(Icons.brush, size: 48),
-                          ],
-                        );
-                      }
-                      if (index == 11) return _buildCaletSection();
-                      return SketchPage(data: _pages[index]);
-                    },
-                  ),
-                )
-              : const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(color: Colors.white54),
-                    SizedBox(height: 16),
-                    Text(
-                      'Cargando portafolio...',
-                      style: TextStyle(color: Colors.white54, fontSize: 14),
-                    ),
-                  ],
+            ),
+            const Positioned(
+              top: 2,
+              left: 0,
+              right: 0,
+              child: Text(
+                'Desliza o presiona ← → para cambiar de página',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  letterSpacing: 0.5,
                 ),
+              ),
+            ),
+          ],
         ),
       ),
     );
