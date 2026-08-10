@@ -58,15 +58,20 @@ class _SketchBookPageState extends State<SketchBookPage> {
   }
 
   Future<void> _precacheImages() async {
-    final allPaths = [
-      ..._pages.where((p) => p.imagePath != null).map((p) => p.imagePath!),
-      ..._extraAssets,
-    ];
-    await Future.wait(
-      allPaths.map(
+    final allImagePaths = _pages
+        .where((p) => p.imagePath != null)
+        .map((p) => p.imagePath!)
+        .toList();
+
+    await Future.wait([
+      ...allImagePaths.map(
         (path) => precacheImage(AssetImage(path), context).catchError((_) {}),
       ),
-    );
+      ..._extraAssets.map(
+        (path) => precacheImage(AssetImage(path), context).catchError((_) {}),
+      ),
+    ]);
+
     if (mounted) setState(() => _imagesReady = true);
   }
 
