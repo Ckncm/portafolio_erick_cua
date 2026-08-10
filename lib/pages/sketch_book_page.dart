@@ -50,19 +50,28 @@ class _SketchBookPageState extends State<SketchBookPage> {
   int get _totalPages => _pages.length;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _precacheImages();
+    });
+  }
+
+  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _precacheImages();
   }
 
   Future<void> _precacheImages() async {
-    final imagePaths = [
+    final allPaths = [
       ..._pages.where((p) => p.imagePath != null).map((p) => p.imagePath!),
       ..._extraAssets,
     ];
+
     await Future.wait(
-      imagePaths.map((path) => precacheImage(AssetImage(path), context)),
+      allPaths.map((path) => precacheImage(AssetImage(path), context).catchError((_) {})),
     );
+
     if (mounted) setState(() => _imagesReady = true);
   }
 
