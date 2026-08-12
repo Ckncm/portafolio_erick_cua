@@ -222,7 +222,7 @@ class _SketchBookPageState extends State<SketchBookPage> {
                   ),
                   const SizedBox(height: 10),
                   _buildInstagramLink(
-                    label: 'Cuenta artística',
+                    label: 'Cuenta Personal',
                     url:
                         'https://www.instagram.com/erickcua_19?igsh=MWxoczgzZmN3cml3OA==&igsi=MWxoczgzZmN3cml3OA==',
                   ),
