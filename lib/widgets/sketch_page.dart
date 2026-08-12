@@ -38,7 +38,7 @@ class SketchPage extends StatelessWidget {
             ),
             SizedBox(height: 8),
             Text(
-              'Erick Cua',
+              'Erick Natanael Cuá Morales',
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.white54,

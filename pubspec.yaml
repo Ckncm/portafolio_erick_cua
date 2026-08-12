@@ -62,6 +62,8 @@ flutter:
     - assets/calet.png
     - assets/google.webp
     - assets/apple.webp
+    - assets/instagram.webp
+    - assets/cat.webp
     - assets/chats.webp
     - assets/clubs.webp
     - assets/explorar.webp

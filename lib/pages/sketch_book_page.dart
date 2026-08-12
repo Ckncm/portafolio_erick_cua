@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
+import 'package:web/web.dart' as web;
 import 'package:portafolio_erick_cua/widgets/sketch_section_page.dart';
 import 'package:portafolio_erick_cua/widgets/store_buttons.dart';
 import 'package:book_page_flip/book_page_flip.dart';
@@ -43,6 +44,8 @@ class _SketchBookPageState extends State<SketchBookPage> {
     'assets/calet.png',
     'assets/google.webp',
     'assets/apple.webp',
+    'assets/instagram.webp',
+    'assets/cat.webp',
   ];
 
   bool _imagesReady = false;
@@ -94,7 +97,7 @@ class _SketchBookPageState extends State<SketchBookPage> {
 
   Widget _buildCaletSection() {
     return SketchSectionPage(
-      data: const SketchPageData(),
+      data: const SketchPageData(title: 'Aplicaciones Moviles'),
       children: [
         Image.asset(
           'assets/calet.png',
@@ -114,6 +117,162 @@ class _SketchBookPageState extends State<SketchBookPage> {
         const SizedBox(height: 24),
         if (kIsWeb) const StoreButtons(),
       ],
+    );
+  }
+
+  void _showInfoModal(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: const Color(0xFF49403E),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      builder: (context) {
+        return DraggableScrollableSheet(
+          initialChildSize: 0.85,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
+          expand: false,
+          builder: (context, scrollController) {
+            return SingleChildScrollView(
+              controller: scrollController,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Colors.white24,
+                      borderRadius: BorderRadius.circular(2),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  Image.asset(
+                    'assets/calet.png',
+                    height: 64,
+                    filterQuality: FilterQuality.high,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Descarga Calet',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Listener(
+                        onPointerDown: (PointerDownEvent _) {
+                          web.window.open(
+                            'https://play.google.com/store/apps/details?id=com.gersonpm.calet&hl=es_BO&pli=1',
+                            '_blank',
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/google.webp',
+                          height: 44,
+                          filterQuality: FilterQuality.high,
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Listener(
+                        onPointerDown: (PointerDownEvent _) {
+                          web.window.open(
+                            'https://apps.apple.com/us/app/calet/id6761416439',
+                            '_blank',
+                          );
+                        },
+                        child: Image.asset(
+                          'assets/apple.webp',
+                          height: 44,
+                          filterQuality: FilterQuality.high,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 28),
+                  Container(
+                    width: double.infinity,
+                    height: 1,
+                    color: Colors.white12,
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Sígueme en Instagram',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  _buildInstagramLink(
+                    label: 'Cuenta artística',
+                    url:
+                        'https://www.instagram.com/nekink_19?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw==',
+                  ),
+                  const SizedBox(height: 10),
+                  _buildInstagramLink(
+                    label: 'Cuenta artística',
+                    url:
+                        'https://www.instagram.com/erickcua_19?igsh=MWxoczgzZmN3cml3OA==&igsi=MWxoczgzZmN3cml3OA==',
+                  ),
+                  const SizedBox(height: 32),
+                  Container(
+                    width: double.infinity,
+                    height: 1,
+                    color: Colors.white12,
+                  ),
+                  const SizedBox(height: 20),
+                  Image.asset(
+                    'assets/cat.webp',
+                    height: 36,
+                    filterQuality: FilterQuality.high,
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'Desarrollado por: Erick Cuá (ckncm)',
+                    style: TextStyle(color: Colors.white38, fontSize: 12),
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  Widget _buildInstagramLink({required String label, required String url}) {
+    return Listener(
+      onPointerDown: (PointerDownEvent _) {
+        web.window.open(url, '_blank');
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/instagram.webp',
+            height: 28,
+            filterQuality: FilterQuality.high,
+          ),
+          const SizedBox(width: 10),
+          Text(
+            label,
+            style: const TextStyle(color: Colors.white, fontSize: 14),
+          ),
+          const SizedBox(width: 6),
+          const Icon(Icons.open_in_new, color: Colors.white38, size: 14),
+        ],
+      ),
     );
   }
 
@@ -194,6 +353,26 @@ class _SketchBookPageState extends State<SketchBookPage> {
                   color: Colors.white,
                   fontSize: 13,
                   letterSpacing: 0.5,
+                ),
+              ),
+            ),
+            Positioned(
+              top: 12,
+              right: 16,
+              child: GestureDetector(
+                onTap: () => _showInfoModal(context),
+                child: Container(
+                  width: 36,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: Colors.white24,
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.info_outline,
+                    color: Colors.white,
+                    size: 20,
+                  ),
                 ),
               ),
             ),
