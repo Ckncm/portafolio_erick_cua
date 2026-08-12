@@ -360,17 +360,17 @@ class _SketchBookPageState extends State<SketchBookPage> {
               top: 12,
               right: 16,
               child: GestureDetector(
-                onTap: () => _showInfoModal(context),
+                onTap: _imagesReady ? () => _showInfoModal(context) : null,
                 child: Container(
                   width: 36,
                   height: 36,
                   decoration: BoxDecoration(
-                    color: Colors.white24,
+                    color: _imagesReady ? Colors.white24 : Colors.white10,
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.info_outline,
-                    color: Colors.white,
+                    color: _imagesReady ? Colors.white : Colors.white24,
                     size: 20,
                   ),
                 ),
