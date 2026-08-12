@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/fullscreen_prompt.dart';
+import 'pages/sketch_book_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const FullscreenPrompt(),
+      home: const SketchBookPage(),
     );
   }
 }
