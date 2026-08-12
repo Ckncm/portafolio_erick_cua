@@ -31,6 +31,8 @@ class _SketchBookPageState extends State<SketchBookPage> {
     SketchPageData(imagePath: 'assets/sketches/6.webp'),
     SketchPageData(imagePath: 'assets/sketches/7.webp'),
     SketchPageData(imagePath: 'assets/sketches/8.webp'),
+    SketchPageData(imagePath: 'assets/sketches/9.webp'),
+    SketchPageData(imagePath: 'assets/sketches/10.webp'),
     SketchPageData.empty(),
     SketchPageData(imagePath: 'assets/chats.webp'),
     SketchPageData(imagePath: 'assets/clubs.webp'),
@@ -325,7 +327,7 @@ class _SketchBookPageState extends State<SketchBookPage> {
                               ],
                             );
                           }
-                          if (index == 11) return _buildCaletSection();
+                          if (index == 13) return _buildCaletSection();
                           return SketchPage(data: _pages[index]);
                         },
                       ),
