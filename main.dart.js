@@ -64625,8 +64625,8 @@ A.a75.prototype={
 $1(a){return new A.l2(0.85,0.5,0.95,!1,new A.a74(this.a),null)},
 $S:413}
 A.a74.prototype={
-$2(a,b){var s=null,r="Cuenta art\xedstica",q=t.p,p=this.a
-return new A.oD(B.zO,b,A.AM(A.d([A.f3(s,s,new A.dS(B.e2,s,s,A.n2(2),s,s,B.aE),4,s,s,40),B.ds,A.jn("assets/calet.png",s,B.ab,s,!1,64),B.Iy,B.Nk,B.dr,A.ab2(A.d([A.ik(B.as,A.jn("assets/google.webp",s,B.ab,s,!1,44),s,new A.a72(),s,s,s),B.vv,A.ik(B.as,A.jn("assets/apple.webp",s,B.ab,s,!1,44),s,new A.a73(),s,s,s)],q),B.bh),B.Iz,A.f3(s,B.fW,s,1,s,s,1/0),B.vw,B.Nh,B.dr,p.DE(r,"https://www.instagram.com/nekink_19?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw=="),B.Ix,p.DE(r,"https://www.instagram.com/erickcua_19?igsh=MWxoczgzZmN3cml3OA==&igsi=MWxoczgzZmN3cml3OA=="),B.IA,A.f3(s,B.fW,s,1,s,s,1/0),B.vw,A.jn("assets/cat.webp",s,B.ab,s,!1,36),B.iG,B.Nj,B.ds],q),B.ap,B.bg,B.aV),s)},
+$2(a,b){var s=null,r=t.p,q=this.a
+return new A.oD(B.zO,b,A.AM(A.d([A.f3(s,s,new A.dS(B.e2,s,s,A.n2(2),s,s,B.aE),4,s,s,40),B.ds,A.jn("assets/calet.png",s,B.ab,s,!1,64),B.Iy,B.Nk,B.dr,A.ab2(A.d([A.ik(B.as,A.jn("assets/google.webp",s,B.ab,s,!1,44),s,new A.a72(),s,s,s),B.vv,A.ik(B.as,A.jn("assets/apple.webp",s,B.ab,s,!1,44),s,new A.a73(),s,s,s)],r),B.bh),B.Iz,A.f3(s,B.fW,s,1,s,s,1/0),B.vw,B.Nh,B.dr,q.DE("Cuenta art\xedstica","https://www.instagram.com/nekink_19?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==&igsi=ZDNlZDc0MzIxNw=="),B.Ix,q.DE("Cuenta Personal","https://www.instagram.com/erickcua_19?igsh=MWxoczgzZmN3cml3OA==&igsi=MWxoczgzZmN3cml3OA=="),B.IA,A.f3(s,B.fW,s,1,s,s,1/0),B.vw,A.jn("assets/cat.webp",s,B.ab,s,!1,36),B.iG,B.Nj,B.ds],r),B.ap,B.bg,B.aV),s)},
 $S:414}
 A.a72.prototype={
 $1(a){v.G.window.open(u.h,"_blank")},
